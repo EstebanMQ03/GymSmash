@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <section th:replace="~{layout/plantilla :: main-header}"></section>
+        <br>
+            <body>
+                <div class="container">
+                    <div class="row justify-content-center mt-20">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="card expediente-card">
+                                <div class="card-header bg-dark text-white text-center">
+                                    <h4 class="mb-0">Expediente del Usuario</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <h5 class="mb-3 text-info">Fecha de la Consulta</h5>
+                                        <div class="input-group mb-4 date" id="datepicker">
+                                            <input type="text" class="form-control" placeholder="Seleccionar Fecha" aria-label="Fecha de la Consulta">
+                                                <span class="input-group-text"><i class="bi bi-calendar"></i></span>
+                                        </div>
+
+                                        <h5 class="mb-3 text-info">Detalles de la Consulta</h5>
+                                        <div class="mb-3">
+                                            <label for="estadoSalud" class="form-label">Estado de Salud General:</label>
+                                            <textarea class="form-control" id="estadoSalud" rows="4" placeholder="Describe el estado de salud general del usuario..."></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lesiones" class="form-label">Lesiones (Actuales o Historial):</label>
+                                            <textarea class="form-control" id="lesiones" rows="4" placeholder="Detalla cualquier lesión relevante..."></textarea>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="medicamentos" class="form-label">Medicamentos (Actuales o Recetados):</label>
+                                            <textarea class="form-control" id="medicamentos" rows="4" placeholder="Lista los medicamentos y su posología..."></textarea>
+                                        </div>
+
+                                        <h5 class="mb-3 text-info">Medidas de Control</h5>
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-4">
+                                                <label for="talla" class="form-label">Talla (cm)</label>
+                                                <input type="number" class="form-control" id="talla" placeholder="Ej: 175" step="0.1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="peso" class="form-label">Peso (kg)</label>
+                                                <input type="number" class="form-control" id="peso" placeholder="Ej: 70.5" step="0.1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="grasa" class="form-label">% Grasa Corporal</label>
+                                                <input type="number" class="form-control" id="grasa" placeholder="Ej: 20.3" step="0.1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="masaMuscular" class="form-label">Masa Muscular (kg)</label>
+                                                <input type="number" class="form-control" id="masaMuscular" placeholder="Ej: 55.0" step="0.1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="hidratacion" class="form-label">% Hidratación</label>
+                                                <input type="number" class="form-control" id="hidratacion" placeholder="Ej: 60.5" step="0.1">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="edadMetabolica" class="form-label">Edad Metabólica</label>
+                                                <input type="number" class="form-control" id="edadMetabolica" placeholder="Ej: 35">
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button type="reset" class="btn btn-secondary">Limpiar</button>
+                                            <button type="submit" class="btn btn-success">Guardar Expediente</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>

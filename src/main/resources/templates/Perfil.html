@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <section th:replace="~{layout/plantilla :: main-header}"></section>
+        <br>
+            <br>
+                <div class="container">
+                    <div class="row justify-content-center mt-10">
+                        <div class="col-md-12 col-lg-8">
+                            <div class="card card-registro">
+                                <div class="card-header text-center bg-dark text-white">
+                                    <h4 class="mb-0">Perfil</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <h5 class="mb-3 text-info">Datos del Usuario</h5>
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-6">
+                                                <label for="nombre" class="form-label">Nombre(s)</label>
+                                                <input type="text" class="form-control" id="nombre" placeholder="Tu nombre" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="apellidos" class="form-label">Apellido(s)</label>
+                                                <input type="text" class="form-control" id="apellidos" placeholder="Tus apellidos" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="cedula" class="form-label">Cédula</label>
+                                                <input type="text" class="form-control" id="cedula" placeholder="Número de cédula" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="edad" class="form-label">Edad</label>
+                                                <input type="number" class="form-control" id="edad" min="1" max="120" required>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="sexo" class="form-label">Sexo</label>
+                                                <select class="form-select" id="sexo" required>
+                                                    <option selected disabled value="">Seleccionar...</option>
+                                                    <option>Masculino</option>
+                                                    <option>Femenino</option>
+                                                    <option>No binario</option>
+                                                    <option>Prefiero no decir</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="telefono" class="form-label">Teléfono</label>
+                                                <input type="tel" class="form-control" id="telefono" placeholder="Ej: 8888-8888" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="correo" class="form-label">Correo Electrónico</label>
+                                                <input type="email" class="form-control" id="correo" placeholder="ejemplo@dominio.com" required>
+                                            </div>
+                                        </div>
+
+                                        <h5 class="mb-3 text-info">Contacto de Emergencia</h5>
+                                        <div class="row g-3 mb-4">
+                                            <div class="col-md-6">
+                                                <label for="nombre-emergencia" class="form-label">Nombre</label>
+                                                <input type="text" class="form-control" id="nombre-emergencia" placeholder="Nombre del contacto" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="telefono-emergencia" class="form-label">Teléfono</label>
+                                                <input type="tel" class="form-control" id="telefono-emergencia" placeholder="Ej: 8888-8888" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-grid">
+                                            <a href="Menu" <button type="submit" class="btn btn-primary btn-lg">Actualizar</button></a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </body>
+                </html>
