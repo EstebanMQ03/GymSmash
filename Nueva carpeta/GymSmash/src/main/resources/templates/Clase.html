@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <section th:replace="~{layout/plantilla :: main-header}"></section>
+        <br>
+            <div class="container my-4">
+                <h3 class="text-center mb-4">Julio 2025</h3>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-7 g-2">
+                    <div class="col text-center fw-bold text-muted">Dom</div>
+                    <div class="col text-center fw-bold text-muted">Lun</div>
+                    <div class="col text-center fw-bold text-muted">Mar</div>
+                    <div class="col text-center fw-bold text-muted">Mié</div>
+                    <div class="col text-center fw-bold text-muted">Jue</div>
+                    <div class="col text-center fw-bold text-muted">Vie</div>
+                    <div class="col text-center fw-bold text-muted">Sáb</div>
+
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">8</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">9</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">10</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">11</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">12</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">13</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">14</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">15</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">16</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card text-center border-primary bg-light">
+                            <div class="card-body p-2">
+                                <p class="mb-0 fw-bold text-primary">17</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    Seleccionar Hora
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <li><a class="dropdown-item" href="#">08:00 AM</a></li>
+                    <li><a class="dropdown-item" href="#">9:00 AM</a></li>
+                    <li><a class="dropdown-item" href="#">010:00 AM</a></li>
+                    <li><a class="dropdown-item" href="#">011:00 AM</a></li>
+                    <li><a class="dropdown-item" href="#">12:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">01:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">02:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">03:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">04:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">05:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">06:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">07:00 PM</a></li>
+                    <li><a class="dropdown-item" href="#">08:00 PM</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Ver más horarios...</a></li>
+                </ul>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div class="card" style="width: 15rem;">
+                    <div class="card-header">
+                        Horas disponibles para [Fecha Seleccionada]
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            09:00 AM 
+                            <span class="badge bg-success rounded-pill">Libre</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            11:00 AM 
+                            <span class="badge bg-danger rounded-pill">Ocupado</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            02:00 PM 
+                            <button class="btn btn-sm btn-outline-primary">Reservar</button>
+                        </li>
+                    </ul>
+                </div>  
+                <div class="card" style="width: 15rem;">
+                    <div class="card-header">
+                        Clases disponibles para [Fecha Seleccionada]
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Spinning 
+                            <span class="badge bg-success rounded-pill">Libre</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Yoga
+                            <span class="badge bg-danger rounded-pill">Ocupado</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Funcional 
+                            <button class="btn btn-sm btn-outline-primary">Reservar</button>
+                        </li>
+                    </ul>
+                </div> 
+            </div>
+    </body>
+</html>

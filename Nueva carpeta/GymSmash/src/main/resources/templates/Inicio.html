@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla :: head}"></head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        <br>
+            <br>
+                <div class="container">
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card">
+                                <div class="card" style="width: 26rem;"> <img src="Logo/logo deportivo proyecto web y patrones.png" class="card-img-top" alt="Logo de GymSmash">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">Iniciar Sesión</h5>
+                                            <form>
+                                                <div class="mb-3">
+                                                    <label for="inputUsuario" class="form-label">Usuario</label>
+                                                    <input type="Usuario" class="form-control" id="inputUsuario" aria-describedby="usuarioHelp">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="inputPassword" class="form-label">Contraseña</label>
+                                                    <input type="password" class="form-control" id="inputPassword">
+                                                </div>
+                                                <div class="mb-3 form-check">
+                                                    <input type="checkbox" class="form-check-input" id="rememberMe">
+                                                        <label class="form-check-label" for="rememberMe">Recordarme</label>
+                                                </div>
+                                                <a href="Menu" <button type="submit" class="btn btn-primary w-100">Acceder</button></a>
+                                                <div class="text-center mt-3">
+                                                    <a href="#" class="card-link">¿Olvidaste tu contraseña?</a>
+                                                    <br>
+                                                    <a href="registro" class="card-link">¿Eres nuevo Usuario? Registrate</a>
+                                                </div>
+                                        </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </body>
+                </html>
