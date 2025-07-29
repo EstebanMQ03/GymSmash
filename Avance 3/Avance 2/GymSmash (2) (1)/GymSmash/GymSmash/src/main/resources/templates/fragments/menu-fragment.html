@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div class="toolbar-menu" th:fragment="toolbar">
+        <div id="inicio" class="menu-item" onclick="loadContent('/inicio-fragment', 'inicio')">
+            <i class="fas fa-home"></i><span>Inicio</span>
+        </div>
+
+        <div id="perfil" class="menu-item" onclick="loadContent('/perfil-fragment', 'perfil')">
+            <i class="fas fa-user"></i><span>Perfil</span>
+        </div>
+        <div id="clase" class="menu-item" onclick="loadContent('/clase-fragment', 'clase')">
+            <i class="fas fa-calendar-alt"></i><span>Clase</span>
+        </div>
+
+        <div id="rutina" class="menu-item" onclick="loadContent('/rutina-fragment', 'rutina')">
+            <i class="fas fa-dumbbell"></i><span>Rutina</span>
+        </div>
+
+        <div id="entrenador" class="menu-item" onclick="loadContent('/entrenador-fragment', 'entrenador')">
+            <i class="fas fa-user-friends"></i><span>1:1 Entrenador</span>
+        </div>
+
+        <div id="expediente" class="menu-item" onclick="loadContent('/expediente-fragment', 'expediente')">
+            <i class="fas fa-chart-line"></i><span>Expediente</span>
+        </div>
+
+        <div id="salir" class="menu-item" onclick="window.location.href = '/login'">
+            <i class="fas fa-power-off"></i><span>Salir</span>
+        </div>
+    </div>
+</body>
+</html>

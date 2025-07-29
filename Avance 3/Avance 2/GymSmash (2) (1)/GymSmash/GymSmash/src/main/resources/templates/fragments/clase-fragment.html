@@ -1,0 +1,91 @@
+<div th:fragment="content">
+    <style>
+        .registro-container {
+            background-color: #d9d9d9;
+            width: 90%;
+            max-width: 1000px;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin: 30px auto;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        h1.title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            color: black;
+        }
+
+        .lista-clases {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .clase-item {
+            background: white;
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .clase-nombre {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .clase-descripcion {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        button.registro-btn {
+            width: 100%;
+            padding: 10px 0;
+            background-color: #3b3a38;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button.registro-btn:hover {
+            background-color: #2f2e2c;
+        }
+    </style>
+
+    <div class="registro-container">
+        <h1 class="title">Registro de Clases</h1>
+
+        <div class="lista-clases">
+            <div th:each="clase : ${clases}" class="clase-item">
+                <div class="clase-nombre" th:text="${clase.nombre}">Nombre de la clase</div>
+                <div class="clase-descripcion" th:text="${clase.descripcion}">Descripción de la clase</div>
+
+                <!--  Botón con data-atributos -->
+                <button class="registro-btn"
+                        th:attr="data-id=${clase.id},data-nombre=${clase.nombre},data-descripcion=${clase.descripcion}"
+                        onclick="agendarDesdeData(this)">
+                    Agendar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

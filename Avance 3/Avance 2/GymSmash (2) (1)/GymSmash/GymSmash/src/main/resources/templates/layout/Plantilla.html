@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <title>GymSmash</title>
+        <meta charset="UTF-8">
+            <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+            <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    </head>
+    <body>
+        <header th:fragment="header" class="header">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-4">
+                <div class="container">
+                    <div class="mx-auto">
+                        <a th:href="@{/}" class="navbar-brand">[[#{aplicacion.titulo}]]</a>
+                    </div>
+
+                    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>  
+            </nav> 
+        </header>
+        <section th:fragment="main-header" class="py-2 bg-dark text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-18 text-center mt-12">
+                        <h1><a th:href="@{Menu}" <i class="fa-solid fa-house"></i> [[#{plantilla.Home}]] </a> <a th:href="@{perfil}" <i class="fa-solid fa-user"> [[#{plantilla.perfil}]]</i> </a> 
+                            <a th:href="@{clase}" <i class="fa-solid fa-calendar-days"></i> [[#{plantilla.clase}]] </a> <a th:href="@{rutina}" <i class="fa-solid fa-person-running"></i> [[#{plantilla.rutina}]] </a> 
+                            <a th:href="@{entrenador}" <i class="fa-solid fa-people-carry-box"></i> [[#{plantilla.1:1 entrenador}]] </a> <a th:href="@{expediente}" <i class="fa-solid fa-square-poll-vertical"></i> 
+                                [[#{plantilla.expediente}]] </a> <a th:href="@{/}" <i class="fa-solid fa-power-off"></i> [[#{plantilla.salir}]]</a></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer th:fragment="footer" class="bg-info text-white mt-5 p-2">
+            <div class="container">
+                <div class="col">
+                    <p class="lead text-center">
+                        &COPY [[#{plantilla.derechos}]]
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

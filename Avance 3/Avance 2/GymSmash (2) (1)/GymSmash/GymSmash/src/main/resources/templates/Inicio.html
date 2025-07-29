@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inicio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login-container {
+            background-color: #d9d9d9;
+            width: 400px;
+            max-width: 90vw;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+
+            /* Solo sombra, sin borde */
+            box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.25);
+        }
+        h1.title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            user-select: none;
+            border: 2px solid #3b3a38; /* mantiene borde en la imagen */
+        }
+        form.login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+        .options {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #333;
+            user-select: none;
+        }
+        .options span {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-weight: 600;
+            text-align: center;
+        }
+        button.login-btn {
+            width: 100%;
+            padding: 12px 0;
+            background-color: #3b3a38;
+            border: 2px solid #3b3a38; /* mantiene borde solo en botón */
+            border-radius: 6px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+        button.login-btn:hover {
+            background-color: #2f2e2c;
+        }
+        .block {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+
+    <script>
+        function goToRegistro() {
+            window.location.href = '/registro';
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="block">
+            <h1 class="title">Login Account</h1>
+        </div>
+
+        <div class="block">
+            <img 
+                th:src="@{/static/logo/logo_app.png}" 
+                alt="Logo Deportivo" 
+                class="logo" 
+            />
+        </div>
+
+        <div class="error-message" th:if="${error}" th:text="${error}"></div>
+
+        <form th:action="@{/login}" action="/login" method="post" class="login-form">
+            <div class="block">
+                <input type="text" name="username" placeholder="Usuario" required />
+            </div>
+
+            <div class="block">
+                <input type="password" name="password" placeholder="Contraseña" required />
+            </div>
+
+            <div class="block">
+                <div class="options">
+                    <span>Olvidaste tu contraseña</span>
+                    <span onclick="goToRegistro()" style="color:#0000EE;">Registrarse</span>
+                </div>
+            </div>
+
+            <div class="block">
+                <button type="submit" class="login-btn">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

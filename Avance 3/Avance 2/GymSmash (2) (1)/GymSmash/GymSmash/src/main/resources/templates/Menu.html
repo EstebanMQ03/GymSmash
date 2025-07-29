@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Menu</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" th:href="@{/static/css/menu.css}">
+    </head>
+    <body>
+        <!-- Toolbar del menú -->
+        <div th:replace="fragments/menu-fragment :: toolbar"></div>
+
+        <!-- Contenido dinámico -->
+        <div id="content-area" style="padding:20px;">
+            <!-- Aquí se carga el fragmento -->
+        </div>
+
+        <!-- Logo flotante -->
+        <img src="/static/logo/logo_app.png" 
+             alt="Logo GymSmash" 
+             class="floating-logo" 
+             onclick="loadContent('/inicio-fragment', 'inicio')" />
+
+        <script>
+            function loadContent(url, activeId) {
+                // Marcar icono activo
+                document.querySelectorAll('.menu-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                if (activeId) {
+                    document.getElementById(activeId).classList.add('active');
+                }
+
+                // Cargar contenido del fragmento
+                fetch(url)
+                        .then(response => response.text())
+                        .then(data => {
+                            document.getElementById("content-area").innerHTML = data;
+                        });
+            }
+
+            // Al iniciar, cargar Inicio automáticamente
+            document.addEventListener("DOMContentLoaded", () => {
+                loadContent("/inicio-fragment", "inicio");
+            });
+
+
+            function agendarDesdeData(btn) {
+                console.log("hola que hace 2");
+                const id = btn.getAttribute("data-id");
+                const nombre = btn.getAttribute("data-nombre");
+                const descripcion = btn.getAttribute("data-descripcion");
+
+                console.log("Botón presionado. Datos:", id, nombre, descripcion);
+
+                cargarAgendarFragment(id, nombre, descripcion);
+            }
+
+            function cargarAgendarFragment(id, nombre, descripcion) {
+                console.log("Cargando agendar-fragment...");
+
+                fetch(`/agendar-fragment?id=${id}&nombre=${encodeURIComponent(nombre)}&descripcion=${encodeURIComponent(descripcion)}`)
+                        .then(res => res.text())
+                        .then(html => {
+                            document.getElementById("content-area").innerHTML = html;
+
+                            // Esperar a que el fragmento se inserte en el DOM antes de iniciar el calendario
+                            setTimeout(() => {
+                                console.log("Iniciando calendario...");
+                                initAgendar();
+                            }, 50); // 50ms de delay para asegurar que el DOM esté listo
+                        })
+                        .catch(err => console.error("Error cargando agendar-fragment:", err));
+            }
+
+            function cargarClaseFragment() {
+                fetch('/clase-fragment')
+                        .then(res => res.text())
+                        .then(html => {
+                            // usar el mismo contenedor
+                            document.getElementById("content-area").innerHTML = html;
+                        });
+            }
+
+
+            // ----------- AGENDAR -----------
+
+            function initAgendar() {
+                const calendar = document.getElementById("calendar");
+                const monthHeader = document.getElementById("calendar-month");
+                const prevBtn = document.getElementById("prev-month");
+                const nextBtn = document.getElementById("next-month");
+                const horarioDropdown = document.getElementById("horario-dropdown");
+                const fechaHidden = document.getElementById("fecha-seleccionada");
+                const horaHidden = document.getElementById("hora-seleccionada");
+
+                if (!calendar) {
+                    console.warn("Calendario no encontrado en el DOM");
+                    return;
+                }
+
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                let currentMonth = today.getMonth();
+                let currentYear = today.getFullYear();
+                let selectedDate = new Date();
+
+                function renderCalendar(year, month) {
+                    const firstDay = new Date(year, month, 1).getDay();
+                    const lastDate = new Date(year, month + 1, 0).getDate();
+
+                    const daysInGrid = [];
+                    const offset = (firstDay === 0 ? 6 : firstDay - 1);
+
+                    for (let i = 0; i < offset; i++) {
+                        daysInGrid.push("");
+                    }
+                    for (let d = 1; d <= lastDate; d++) {
+                        daysInGrid.push(d);
+                    }
+
+                    calendar.innerHTML = "";
+                    monthHeader.textContent = new Date(year, month).toLocaleString("es-ES", {month: "long", year: "numeric"});
+
+                    daysInGrid.forEach(day => {
+                        const dayDiv = document.createElement("div");
+                        dayDiv.classList.add("calendar-day");
+
+                        if (day !== "") {
+                            const thisDate = new Date(year, month, day);
+                            thisDate.setHours(0, 0, 0, 0);
+
+                            if (thisDate < today) {
+                                dayDiv.classList.add("disabled");
+                            } else {
+                                dayDiv.addEventListener("click", () => {
+                                    selectedDate = thisDate;
+                                    fechaHidden.value = selectedDate.toISOString().split("T")[0];
+                                    renderCalendar(year, month);
+                                    updateHorarios(selectedDate);
+                                });
+                            }
+
+                            if (thisDate.toDateString() === selectedDate.toDateString()) {
+                                dayDiv.classList.add("selected");
+                            }
+
+                            dayDiv.textContent = day;
+                        }
+
+                        calendar.appendChild(dayDiv);
+                    });
+
+                    // Desactivar botón "prev" si estamos en el mes actual
+                    const isCurrentMonth = (year === today.getFullYear() && month === today.getMonth());
+                    prevBtn.style.visibility = isCurrentMonth ? "hidden" : "visible";
+                }
+
+                function updateHorarios(date) {
+                    horarioDropdown.innerHTML = `<option value="">Seleccionar horario</option>`;
+                    const day = date.getDay();
+                    const isWeekend = (day === 0 || day === 6);
+
+                    let startHour = 8;
+                    let endHour = isWeekend ? 14 : 22;
+
+                    const now = new Date();
+                    if (date.toDateString() === now.toDateString()) {
+                        const currentHour = now.getHours();
+                        const currentMin = now.getMinutes();
+                        if (currentHour >= startHour) {
+                            startHour = currentMin > 30 ? currentHour + 1 : currentHour;
+                            if (currentMin <= 30) {
+                                startHour = currentHour;
+                            }
+                        }
+                    }
+
+                    for (let h = startHour; h <= endHour; h++) {
+                        for (let m of [0, 30]) {
+                            if (h === now.getHours() && date.toDateString() === now.toDateString() && m <= now.getMinutes())
+                                continue;
+                            if (h < startHour)
+                                continue;
+
+                            const hour12 = h > 12 ? h - 12 : h;
+                            const ampm = h >= 12 ? "pm" : "am";
+                            const hora = `${hour12}:${m === 0 ? "00" : m} ${ampm}`;
+
+                            const option = document.createElement("option");
+                            option.value = hora;
+                            option.textContent = hora;
+                            horarioDropdown.appendChild(option);
+                        }
+                    }
+
+                    horarioDropdown.addEventListener("change", () => {
+                        horaHidden.value = horarioDropdown.value;
+                    });
+                }
+
+                prevBtn.addEventListener("click", () => {
+                    if (currentMonth > 0) {
+                        currentMonth--;
+                    } else {
+                        currentMonth = 11;
+                        currentYear--;
+                    }
+                    renderCalendar(currentYear, currentMonth);
+                });
+
+                nextBtn.addEventListener("click", () => {
+                    if (currentMonth < 11) {
+                        currentMonth++;
+                    } else {
+                        currentMonth = 0;
+                        currentYear++;
+                    }
+                    renderCalendar(currentYear, currentMonth);
+                });
+
+                renderCalendar(currentYear, currentMonth);
+                fechaHidden.value = today.toISOString().split("T")[0];
+                updateHorarios(today);
+            }
+
+            function validarAgendar() {
+                const horaSeleccionada = document.getElementById("hora-seleccionada").value;
+
+                if (!horaSeleccionada || horaSeleccionada.trim() === "") {
+                    mostrarWarning("Selecciona un horario");
+                    return false; // evita que se envíe el formulario
+                }
+
+                return true; // permite enviar si hay horario seleccionado
+            }
+
+            function mostrarWarning(mensaje) {
+                let warning = document.getElementById("warning-msg");
+
+                if (!warning) {
+                    warning = document.createElement("div");
+                    warning.id = "warning-msg";
+                    warning.style.color = "red";
+                    warning.style.fontSize = "0.9rem";
+                    warning.style.marginTop = "10px";
+                    warning.style.textAlign = "center";
+                    document.querySelector(".agendar-container").appendChild(warning);
+                }
+
+                warning.textContent = mensaje;
+            }
+
+            // ---------- PERFIL (similar a registro) ----------
+            function validarPasswordsPerfil() {
+                const pass = document.getElementById('password').value;
+                const confirm = document.getElementById('confirm-password').value;
+                const error = document.getElementById('password-error-perfil');
+
+                if (!pass || !confirm) {
+                    error.textContent = "";
+                    return false;
+                }
+
+                if (pass !== confirm) {
+                    error.textContent = "Las contraseñas no coinciden";
+                    return false;
+                }
+
+                error.textContent = "";
+                return true;
+            }
+
+            function validarFormularioPerfil(event) {
+                if (!validarPasswordsPerfil()) {
+                    return false;
+                }
+                return true;
+            }
+
+            // PLAN FRAGMENT
+
+            function cargarPlan(dia) {
+                fetch(`/plan-fragment?dia=${dia}`)
+                        .then(res => res.text())
+                        .then(html => {
+                            document.getElementById("content-area").innerHTML = html;
+                        })
+                        .catch(err => console.error("Error cargando plan-fragment:", err));
+            }
+
+        </script>
+    </body>
+</html>
